@@ -12,16 +12,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
-        if (isValidUser(username, password)) {
-            response.sendRedirect("welcome.jsp");
-        } else {
-            response.sendRedirect("error.jsp");
+        String i = request.getParameter("i");
+        if (i.equals("1")){
+            if (isValidUser(username, password)) {
+                response.sendRedirect("welcome.jsp");
+            } else {
+                response.sendRedirect("error.jsp");
+            }
+        }else {
+            System.out.println("注册");
         }
+
     }
     private boolean isValidUser(String username, String password) {
-        // 在这里添加验证用户名和密码的逻辑，例如查询数据库
-        // 这里我们只是简单地检查用户名和密码是否为"admin"和"1234"
         return "admin".equals(username) && "1234".equals(password);
     }
 }
