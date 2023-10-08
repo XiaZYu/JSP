@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-登陆成功
+ <%=session.getAttribute("username")%>登陆成功
 </body>
 </html>

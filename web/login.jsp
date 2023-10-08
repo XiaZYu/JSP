@@ -17,9 +17,9 @@
             <form id="exportForm" class="big-contain" action="login" method="post">
                 <div id="title" class="btitle">账户登录</div>
                 <div class="bform">
-                    <input type="text" id="username" name="username" placeholder="用户名" required>
-                    <input type="password" id="password" name="password" placeholder="密码" required>
-                    <input type="hidden" id="i" name="i">
+                    <input type="text" id="username" name="username" placeholder="用户名" required oninvalid="setCustomValidity('用户名不能为空')" oninput="setCustomValidity('')" />
+                    <input type="password" id="password" name="password" placeholder="密码" required oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" />
+                    <input type="hidden" id="i" name="i" />
                 </div>
                     <button id="bbutton" class="bbutton" onclick="ExpoetDate()">登录</button>
             </form>
@@ -77,6 +77,7 @@
         transform: translate(-50%,-50%);
         background-color: #fff;
         border-radius: 20px;
+        overflow: hidden;
         box-shadow: 0 0 3px #f0f0f0,
         0 0 6px #f0f0f0;
     }
@@ -86,6 +87,8 @@
         position: absolute;
         top: 0;
         left: 0;
+        transform: translateX(0%);
+        transition: all 1s;
     }
     .big-contain{
         width: 100%;
@@ -137,6 +140,8 @@
         top: 0;
         left: 70%;
         position: absolute;
+        transform: translateX(0%);
+        transition: all 1s;
     }
     .small-contain{
         width: 100%;
