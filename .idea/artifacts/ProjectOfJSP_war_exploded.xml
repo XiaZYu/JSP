@@ -2,12 +2,12 @@
   <artifact type="exploded-war" name="ProjectOfJSP:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/ProjectOfJSP_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="ProjectOfJSP/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ProjectOfJSP" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="ProjectOfJSP/web/Web" />
     </root>
   </artifact>
 </component>
