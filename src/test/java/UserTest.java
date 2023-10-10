@@ -12,14 +12,12 @@ public class UserTest {
     public void find(){
             SqlSession session = GetSqlSession.getSqlSession();
             UserMapper userMapper = session.getMapper(UserMapper.class);
-            List<User> list = userMapper.findAll();
-            //打印返回值信息
-            for (User user : list) {
-                System.out.println(user.toString());
-            }
-            //提交会话
+            User list = userMapper.queryByName("lisi");
+//            打印返回值信息
+                System.out.println(list.toString());
+//            提交会话
             session.commit();
-            //关闭会话
+//            关闭会话
             session.close();
     }
 }

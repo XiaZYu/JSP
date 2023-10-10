@@ -17,8 +17,11 @@
             <form id="exportForm" class="big-contain" action="login" method="post">
                 <div id="title" class="btitle">账户登录</div>
                 <div class="bform">
-                    <input type="text" id="username" name="username" placeholder="用户名" required oninvalid="setCustomValidity('用户名不能为空')" oninput="setCustomValidity('')" />
-                    <input type="password" id="password" name="password" placeholder="密码" required oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" />
+                    <input type="text" id="username" name="username" placeholder="用户名"
+                           required oninvalid="setCustomValidity('用户名不能为空')" oninput="setCustomValidity('')" value="${messageModel.object.username}"/>
+                    <input type="password" id="password" name="password" placeholder="密码"
+                           required oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" value="${messageModel.object.password}"/>
+                    <span class="errTips">${messageModel.msg}</span>
                     <input type="hidden" id="i" name="i" />
                 </div>
                     <button id="bbutton" class="bbutton" onclick="ExpoetDate()">登录</button>
@@ -46,6 +49,8 @@
             document.getElementById("stitle").innerHTML = "欢迎回来!";
             document.getElementById("scontent").innerHTML = "与我们保持联系，请登录你的账户";
             document.getElementById("sbutton").innerHTML = "登录";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
             i++;
         } else {
             document.getElementById("small-box").style.left = "70%";
@@ -55,12 +60,16 @@
             document.getElementById("stitle").innerHTML = "你好，朋友!";
             document.getElementById("scontent").innerHTML = "开始注册，和我们一起旅行";
             document.getElementById("sbutton").innerHTML = "注册";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
             i--;
         }
     }
     function ExpoetDate(){
         document.getElementById("i").value = i;
     }
+        //禁用“确认重新提交表单”
+        window.history.replaceState(null, null, window.location.href);
 </script>
 <style>
     .login-register{
@@ -111,6 +120,14 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
+    }
+    .bform .errTips{
+        display: block;
+        width: 50%;
+        text-align: left;
+        color: red;
+        font-size: 0.7em;
+        margin-left: 1em;
     }
     .bform input{
         width: 50%;
