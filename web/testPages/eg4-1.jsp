@@ -29,7 +29,14 @@
 </p>
 <p>
   这是一个html注释内容<!-- comment [ <%= 1234 %> ] -->
-
 </p>
+<%!
+  String str="asdad";
+  String print(String ss){
+    System.out.println("我要打印一个字符串");
+    return ss+str;
+  }
+%>
+<%=print("asd")%>
 </body>
 </html>
