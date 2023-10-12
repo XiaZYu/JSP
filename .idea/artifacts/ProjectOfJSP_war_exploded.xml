@@ -6,6 +6,15 @@
         <element id="directory" name="classes">
           <element id="module-output" name="ProjectOfJSP" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/jstl.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/standard.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mybatis-3.5.13.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-5.1.39-bin.jar" />
+          <element id="library" level="project" name="Maven: com.alibaba.fastjson2:fastjson2-extension:2.0.41" />
+          <element id="library" level="project" name="Maven: com.alibaba.fastjson2:fastjson2:2.0.41" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson2-2.0.34.jar" />
+        </element>
       </element>
       <element id="javaee-facet-resources" facet="ProjectOfJSP/web/Web" />
     </root>

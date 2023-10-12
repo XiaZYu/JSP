@@ -72,12 +72,10 @@ public class LoginServlet extends HttpServlet {
         if (messageModel.getCode() == 0) {
             //将信息模型中的用户信息设置到session作用域中，请求转发跳转
             request.getSession().setAttribute("User",messageModel.getObject());
-            System.out.println(messageModel.getObject().toString());
             response.sendRedirect("index.jsp");
         }else {
             //将信息模型对象设置到request作用域中，请求转发跳转
             request.setAttribute("messageModel",messageModel);
-            System.out.println(messageModel.getObject().toString());
             request
                     .getRequestDispatcher("login.jsp")
                     .forward(request,response);

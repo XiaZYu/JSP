@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import until.GetSqlSession;
 import until.StringUtil;
 
+import java.util.List;
+
 public class UserService {
     MessageModel messagemodel = new MessageModel();
     User u = new User();
@@ -99,6 +101,31 @@ public class UserService {
             messagemodel.setCode(0);
             messagemodel.setObject(u);
         }
+
+        return messagemodel;
+    }
+
+    public MessageModel findById(Integer id){
+        //调用dao层
+        SqlSession session = GetSqlSession.getSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        List user = userMapper.queryById();
+        session.close();
+
+        //判断查询是否成功
+        if (user != null){
+            messagemodel.setCode(1);
+            System.out.println("查询失败");
+            messagemodel.setMsg("查询失败");
+            return messagemodel;
+        }
+
+//        u.setUsername(user.getUsername());
+//        u.setPassword(user.getPassword());
+//        u.setEmail(user.getEmail());
+//        u.setPhone(user.getPhone());
+
+        messagemodel.setObject(u);
 
         return messagemodel;
     }

@@ -12,8 +12,8 @@
   </head>
   <body>
   ${User.username}
-  <form id="exportForm" class="big-contain" action="Login" method="post">
-    <button name="event" value="logout">登出</button>
+  <form id="exportForm" class="big-contain" action="User" method="post">
+    <button name="event" value="queryAll">登出</button>
   </form>
   </body>
 </html>

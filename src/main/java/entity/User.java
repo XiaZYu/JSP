@@ -8,12 +8,12 @@ public class User {
     private String phone;
     @Override
     public String toString() {
-        return "user{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
+        return "{" +
+                "'id':" + id +
+                ", 'username':'" + username + '\'' +
+                ", 'password':'" + password + '\'' +
+                ", 'email':'" + email + '\'' +
+                ", 'phone':'" + phone + '\'' +
                 '}';
     }
 

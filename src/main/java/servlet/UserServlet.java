@@ -1,5 +1,6 @@
 package servlet;
 
+import com.alibaba.fastjson2.JSONObject;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,12 +26,23 @@ public class UserServlet extends HttpServlet {
         String event = request.getParameter("event");
 
         switch (event){
+            case "queryAll":
+                queryAll(request,response);
+                break;
             case "update":
                 updata(request,response);
                 break;
             default:
                 break;
         }
+    }
+    private void queryAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+       String user = request.getSession().getAttribute("User").toString();
+        System.out.println(user);
+        //将String字符转为Json对象
+        JSONObject jsonObject = JSONObject.parseObject(user);
+        System.out.println(jsonObject.getString("id"));
+//        userService.findById(id);
     }
 
     private void updata(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
