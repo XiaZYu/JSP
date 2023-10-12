@@ -14,15 +14,15 @@
 <div class="login-register">
     <div class="contain">
         <div id="big-box" class="big-box">
-            <form id="exportForm" class="big-contain" action="login" method="post">
+            <form id="exportForm" class="big-contain" action="User" method="post">
                 <div id="title" class="btitle">账户登录</div>
                 <div class="bform">
-                    <input type="text" id="username" name="username" placeholder="用户名"
+                    <input type="text" id="username" name="username" placeholder="用户名" title="请填写用户名"
                            required oninvalid="setCustomValidity('用户名不能为空')" oninput="setCustomValidity('')" value="${messageModel.object.username}"/>
-                    <input type="password" id="password" name="password" placeholder="密码"
-                           required oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')" value="${messageModel.object.password}"/>
+                    <input type="password" id="password" name="password" placeholder="密码" title="请填写密码"
+                           required oninvalid="setCustomValidity('密码不能为空')" oninput="setCustomValidity('')"/>
                     <span class="errTips">${messageModel.msg}</span>
-                    <input type="hidden" id="i" name="i" />
+                    <input type="hidden" id="event" name="event" />
                 </div>
                     <button id="bbutton" class="bbutton" onclick="ExpoetDate()">登录</button>
             </form>
@@ -40,6 +40,8 @@
 </body>
 <script>
     let i = 1;
+    let event = "login";
+
     function changeType() {
         if (i === 1) {
             document.getElementById("small-box").style.left = "0";
@@ -49,8 +51,10 @@
             document.getElementById("stitle").innerHTML = "欢迎回来!";
             document.getElementById("scontent").innerHTML = "与我们保持联系，请登录你的账户";
             document.getElementById("sbutton").innerHTML = "登录";
+            document.getElementById("password").title =  "密码：包含数字和字母，长度不超过20";
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
+            event = "register";
             i++;
         } else {
             document.getElementById("small-box").style.left = "70%";
@@ -60,16 +64,20 @@
             document.getElementById("stitle").innerHTML = "你好，朋友!";
             document.getElementById("scontent").innerHTML = "开始注册，和我们一起旅行";
             document.getElementById("sbutton").innerHTML = "注册";
+            document.getElementById("password").title =  "请填写密码";
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
+            event = "login";
             i--;
         }
     }
+
     function ExpoetDate(){
-        document.getElementById("i").value = i;
+        document.getElementById("event").value = event;
     }
         //禁用“确认重新提交表单”
         window.history.replaceState(null, null, window.location.href);
+
 </script>
 <style>
     .login-register{

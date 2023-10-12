@@ -11,7 +11,7 @@ package entity.vo;
  */
 public class MessageModel {
 
-    private Integer code = 1;
+    private Integer code = 0;
     private String msg = "成功";
     private Object object;
 
