@@ -11,9 +11,14 @@
     <title>$Title$</title>
   </head>
   <body>
-  ${User.username}
+
   <form id="exportForm" class="big-contain" action="User" method="post">
-    <button name="event" value="queryAll">登出</button>
+    <input name="username" type="text" value="${User.username}">
+    <input name="password" type="text" value="${User.password}">
+    <input name="email" type="text" value="${User.email}">
+    <input name="phone" type="text" value="${User.phone}">
+    <input type="hidden" id="event" name="event" value="update"/>
+    <button>修改</button>
   </form>
   </body>
 </html>

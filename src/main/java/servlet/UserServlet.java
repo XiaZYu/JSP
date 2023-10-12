@@ -1,6 +1,7 @@
 package servlet;
 
 import com.alibaba.fastjson2.JSONObject;
+import entity.vo.MessageModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,9 +27,6 @@ public class UserServlet extends HttpServlet {
         String event = request.getParameter("event");
 
         switch (event){
-            case "queryAll":
-                queryAll(request,response);
-                break;
             case "update":
                 updata(request,response);
                 break;
@@ -36,16 +34,32 @@ public class UserServlet extends HttpServlet {
                 break;
         }
     }
-    private void queryAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-       String user = request.getSession().getAttribute("User").toString();
-        System.out.println(user);
-        //将String字符转为Json对象
-        JSONObject jsonObject = JSONObject.parseObject(user);
-        System.out.println(jsonObject.getString("id"));
-//        userService.findById(id);
-    }
 
     private void updata(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
 
+        String user = request.getSession().getAttribute("User").toString();
+
+        //将String字符转为Json对象
+        JSONObject jsonObject = JSONObject.parseObject(user);
+        int id = Integer.parseInt(jsonObject.getString("id"));
+
+        MessageModel messageModel = userService.userUpdate(id,username,password,email,phone);
+        System.out.println(messageModel);
+
+        if (messageModel.getCode() == 0) {
+            //将信息模型中的用户信息设置到session作用域中，请求转发跳转
+            request.getSession().setAttribute("User",messageModel.getObject());
+            response.sendRedirect("index.jsp");
+        }else {
+            //将信息模型对象设置到request作用域中，请求转发跳转
+            request.setAttribute("messageModel",messageModel);
+            request
+                    .getRequestDispatcher("login.jsp")
+                    .forward(request,response);
+        }
     }
 }

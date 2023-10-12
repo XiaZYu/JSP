@@ -105,28 +105,61 @@ public class UserService {
         return messagemodel;
     }
 
-    public MessageModel findById(Integer id){
-        //调用dao层
-        SqlSession session = GetSqlSession.getSqlSession();
-        UserMapper userMapper = session.getMapper(UserMapper.class);
-        List user = userMapper.queryById();
-        session.close();
-
-        //判断查询是否成功
-        if (user != null){
+    public MessageModel userUpdate(int id, String username, String password, String email, String phone){
+        //判断用户名和密码格式是否正确
+        if (!username.matches("^[\\u4e00-\\u9fa5a-zA-Z0-9]{0,11}$")){
             messagemodel.setCode(1);
-            System.out.println("查询失败");
-            messagemodel.setMsg("查询失败");
+            System.out.println("用户名格式错误");
+            messagemodel.setMsg("用户名格式错误");
+            return messagemodel;
+        }
+        if (!password.matches("^[(?=.*?[0-9])(?=.*?[a-z])]{6,20}$")){
+            messagemodel.setCode(1);
+            System.out.println("密码格式错误");
+            messagemodel.setMsg("密码格式错误");
+            return messagemodel;
+        }
+        if (!email.matches("^(\\w+([-.][A-Za-z0-9]+)*){3,18}@\\w+([-.][A-Za-z0-9]+)*\\.\\w+([-.][A-Za-z0-9]+)*$")){
+            messagemodel.setCode(1);
+            System.out.println("邮箱格式错误");
+            messagemodel.setMsg("邮箱格式错误");
+            return messagemodel;
+        }
+        if (!phone.matches("^[1][3,4,5,7,8][0-9]{9}$")){
+            messagemodel.setCode(1);
+            System.out.println("电话格式错误");
+            messagemodel.setMsg("电话格式错误");
             return messagemodel;
         }
 
-//        u.setUsername(user.getUsername());
-//        u.setPassword(user.getPassword());
-//        u.setEmail(user.getEmail());
-//        u.setPhone(user.getPhone());
+        //返回数据
+        u.setId(id);
+        u.setUsername(username);
+        u.setPassword(password);
+        u.setEmail(email);
+        u.setPhone(phone);
 
-        messagemodel.setObject(u);
+        //调用dao层
+        SqlSession session = GetSqlSession.getSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        int code = userMapper.updateUser(u);
+
+        //提交数据
+        session.commit();
+        //关闭会话
+        session.close();
+
+        //判断是否注册成功
+        if (code == 0){
+            messagemodel.setCode(1);
+            messagemodel.setMsg("注册失败");
+            return messagemodel;
+        }else{
+            messagemodel.setCode(0);
+            messagemodel.setObject(u);
+        }
 
         return messagemodel;
     }
+
 }
