@@ -10,7 +10,7 @@ import service.UserService;
 
 import java.io.IOException;
 
-@WebServlet("/User")
+@WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
     //实例化UserService对象
     private UserService UserService = new UserService();
@@ -38,6 +38,8 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void logout(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        request.getSession().invalidate();
+        response.sendRedirect("index.jsp");
     }
 
     private void register(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -49,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         if (messageModel.getCode() == 0) {
             //将信息模型中的用户信息设置到session作用域中，请求转发跳转
             request.getSession().setAttribute("User",messageModel.getObject());
-            response.sendRedirect("welcome.jsp");
+            response.sendRedirect("index.jsp");
         }else {
             //将信息模型对象设置到request作用域中，请求转发跳转
             request.setAttribute("messageModel",messageModel);
@@ -70,10 +72,12 @@ public class LoginServlet extends HttpServlet {
         if (messageModel.getCode() == 0) {
             //将信息模型中的用户信息设置到session作用域中，请求转发跳转
             request.getSession().setAttribute("User",messageModel.getObject());
-            response.sendRedirect("welcome.jsp");
+            System.out.println(messageModel.getObject().toString());
+            response.sendRedirect("index.jsp");
         }else {
             //将信息模型对象设置到request作用域中，请求转发跳转
             request.setAttribute("messageModel",messageModel);
+            System.out.println(messageModel.getObject().toString());
             request
                     .getRequestDispatcher("login.jsp")
                     .forward(request,response);

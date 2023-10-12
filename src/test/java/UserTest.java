@@ -11,7 +11,7 @@ import java.util.concurrent.ForkJoinPool;
 
 public class UserTest {
     @Test
-    public void find(){
-       System.out.println(!"2222".matches("^[(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])]{6,20}$"));
+    public void updateuser(){
+
 }
 }

@@ -8,9 +8,9 @@ public class User {
     private String phone;
     @Override
     public String toString() {
-        return "Tuser{" +
+        return "user{" +
                 "id=" + id +
-                ", userName='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +

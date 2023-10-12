@@ -11,6 +11,9 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  ${User.username}
+  <form id="exportForm" class="big-contain" action="Login" method="post">
+    <button name="event" value="logout">登出</button>
+  </form>
   </body>
 </html>

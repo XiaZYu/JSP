@@ -8,13 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>登录注册</title>
 </head>
 <body>
 <div class="login-register">
     <div class="contain">
         <div id="big-box" class="big-box">
-            <form id="exportForm" class="big-contain" action="User" method="post">
+            <form id="exportForm" class="big-contain" action="Login" method="post">
                 <div id="title" class="btitle">账户登录</div>
                 <div class="bform">
                     <input type="text" id="username" name="username" placeholder="用户名" title="请填写用户名"
