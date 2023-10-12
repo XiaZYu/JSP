@@ -48,7 +48,6 @@ public class UserServlet extends HttpServlet {
         int id = Integer.parseInt(jsonObject.getString("id"));
 
         MessageModel messageModel = userService.userUpdate(id,username,password,email,phone);
-        System.out.println(messageModel);
 
         if (messageModel.getCode() == 0) {
             //将信息模型中的用户信息设置到session作用域中，请求转发跳转
