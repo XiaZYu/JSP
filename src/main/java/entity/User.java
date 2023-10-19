@@ -6,6 +6,9 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String article_numb;
+    private String avatar;
+
     @Override
     public String toString() {
         return "{" +
@@ -14,7 +17,25 @@ public class User {
                 ", 'password':'" + password + '\'' +
                 ", 'email':'" + email + '\'' +
                 ", 'phone':'" + phone + '\'' +
+                ", 'article_numb':'" + article_numb + '\'' +
+                ", 'avatar':'" + avatar + '\'' +
                 '}';
+    }
+
+    public String getArticle_numb() {
+        return article_numb;
+    }
+
+    public void setArticle_numb(String article_numb) {
+        this.article_numb = article_numb;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getId() {
