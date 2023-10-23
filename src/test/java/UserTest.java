@@ -5,6 +5,7 @@ import entity.User;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+import service.ArticleService;
 import service.UserService;
 import until.GetSqlSession;
 
@@ -14,5 +15,8 @@ import java.util.concurrent.ForkJoinPool;
 public class UserTest {
     @Test
     public void find(){
+        ArticleService articleService = new ArticleService();
+        MessageModel messageModel = articleService.articleFindAll();
+        System.out.println(messageModel.getObject());
 }
 }

@@ -8,6 +8,7 @@ public class User {
     private String phone;
     private String article_numb;
     private String avatar;
+    private String day;
 
     @Override
     public String toString() {
@@ -19,7 +20,16 @@ public class User {
                 ", 'phone':'" + phone + '\'' +
                 ", 'article_numb':'" + article_numb + '\'' +
                 ", 'avatar':'" + avatar + '\'' +
+                ", 'day':'" + day + '\'' +
                 '}';
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getArticle_numb() {
