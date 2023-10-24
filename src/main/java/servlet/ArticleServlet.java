@@ -16,21 +16,15 @@ public class ArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
+        findAll(request,response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置编码格式
+        response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         //获取请求参数
         String event = request.getParameter("event");
-//        switch (event){
-//            case "find":
-                findAll(request,response);
-//                break;
-//            default:
-//                break;
-//        }
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{

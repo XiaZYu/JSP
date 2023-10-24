@@ -9,6 +9,7 @@ public class User {
     private String article_numb;
     private String avatar;
     private String day;
+    private String daytime;
 
     @Override
     public String toString() {
@@ -21,7 +22,16 @@ public class User {
                 ", 'article_numb':'" + article_numb + '\'' +
                 ", 'avatar':'" + avatar + '\'' +
                 ", 'day':'" + day + '\'' +
+                ", 'daytime':'" + daytime + '\'' +
                 '}';
+    }
+
+    public String getDaytime() {
+        return daytime;
+    }
+
+    public void setDaytime(String daytime) {
+        this.daytime = daytime;
     }
 
     public String getDay() {

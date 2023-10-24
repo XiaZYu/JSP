@@ -8,7 +8,7 @@ public class Article {
     private String content_pdf;
     private String photo;
     private String describe;
-
+    private String likes;
     @Override
     public String toString() {
         return "{" +
@@ -19,7 +19,16 @@ public class Article {
                 ", content_pdf='" + content_pdf + '\'' +
                 ", photo='" + photo + '\'' +
                 ", describe='" + describe + '\'' +
+                ", likes='" + likes + '\'' +
                 '}';
+    }
+
+    public String getLikes() {
+        return likes;
+    }
+
+    public void setLikes(String likes) {
+        this.likes = likes;
     }
 
     public int getArticle_id() {

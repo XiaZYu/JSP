@@ -1,6 +1,7 @@
 package servlet;
 
 import com.alibaba.fastjson2.JSONObject;
+import entity.User;
 import entity.vo.MessageModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        super.doPost(request, response);
+        addDay(request, response);
     }
 
     @Override
@@ -25,13 +26,9 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         //获取请求参数
         String event = request.getParameter("event");
-
         switch (event){
-            case "update":
+            case "update" ->
                 updata(request,response);
-                break;
-            default:
-                break;
         }
     }
 
@@ -58,6 +55,22 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("messageModel",messageModel);
             request
                     .getRequestDispatcher("login.jsp")
+                    .forward(request,response);
+        }
+    }
+
+    private void addDay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String id = request.getParameter("id");
+        String time = request.getParameter("time");
+        MessageModel messageModel = userService.userAddDay(Integer.parseInt(id),time);
+
+        if (messageModel.getCode() == 0) {
+            request.getSession().setAttribute("User",messageModel.getObject());
+            response.sendRedirect("index.jsp");
+        }else {
+            request.setAttribute("messageModel",messageModel);
+            request
+                    .getRequestDispatcher("index.jsp")
                     .forward(request,response);
         }
     }

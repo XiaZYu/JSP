@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import until.GetSqlSession;
 import until.StringUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class UserService {
@@ -52,6 +54,7 @@ public class UserService {
         //返回数据
         u.setUsername(username);
         u.setPassword(password);
+        u.setAvatar("./resource/avatar/Multiavatar-e9c70f6307083f90fa.png");
 
         //判断字符串是否为空
         if (StringUtil.isEmpty(username) || StringUtil.isEmpty(password)){
@@ -162,4 +165,29 @@ public class UserService {
         return messagemodel;
     }
 
+    public MessageModel userAddDay(int id,String time) {
+        MessageModel messagemodel = new MessageModel();
+
+        SqlSession session = GetSqlSession.getSqlSession();
+        UserMapper userMapper = session.getMapper(UserMapper.class);
+        String today= new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+
+        if (today.compareTo(time) > 0){
+            int a = userMapper.addDay(id);
+            u = userMapper.queryById(id);
+            //提交数据
+            session.commit();
+        }else{
+            messagemodel.setCode(1);
+            messagemodel.setMsg("请勿重复签到");
+            return messagemodel;
+        }
+        session.close();
+
+        messagemodel.setCode(0);
+        messagemodel.setObject(u);
+        messagemodel.setMsg("签到成功");
+        return messagemodel;
+    }
 }

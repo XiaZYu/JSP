@@ -9,4 +9,8 @@ public interface UserMapper {
     int insertUser(User user);
 
     int updateUser(User user);
+
+    int addDay(int id);
+
+    User queryById(int id);
 }

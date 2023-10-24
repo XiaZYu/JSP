@@ -9,9 +9,18 @@
         select * from tb_user where username like '%${name}%'
     </select>
 
+    <select id="queryById" resultType="entity.User" timeout="1">
+        select * from tb_user where id=#{id}
+    </select>
+
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id" timeout="1">
-        insert into tb_user(username,password) values (#{username},#{password});
+        insert into tb_user(username,password,avatar) values (#{username},#{password},#{avatar});
     </insert>
+
+    <update id="addDay">
+        update tb_user set day=day+1 where id=#{id};
+        update tb_user set daytime=CURRENT_TIMESTAMP where id=#{id};
+    </update>
 
     <update id="updateUser" parameterType="entity.User" timeout="1">
         update tb_user set username=#{username},password=#{password},email=#{email},phone=#{phone} where id=#{id}

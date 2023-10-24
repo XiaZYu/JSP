@@ -17,11 +17,11 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置编码格式
+        response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         //获取请求参数
         String event = request.getParameter("event");
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         if (messageModel.getCode() == 0) {
             //将信息模型中的用户信息设置到session作用域中，请求转发跳转
             request.getSession().setAttribute("User",messageModel.getObject());
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("login.jsp");
         }else {
             //将信息模型对象设置到request作用域中，请求转发跳转
             request.setAttribute("messageModel",messageModel);
