@@ -8,6 +8,9 @@
     <select id="queryAll" resultType="entity.Article" timeout="1">
         select * from tb_article
     </select>
+    <select id="queryById" resultType="entity.Article">
+        select * from tb_article where article_id = #{id}
+    </select>
 
 </mapper>
 

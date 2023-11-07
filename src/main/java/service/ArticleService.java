@@ -31,4 +31,24 @@ public class ArticleService {
 
         return messageModel;
     }
+
+    public MessageModel articleFindById(String id){
+        //调用dao层
+        SqlSession session = GetSqlSession.getSqlSession();
+        ArticleMapper articleMapper =  session.getMapper(ArticleMapper.class);
+        List article = articleMapper.queryById(id);
+        session.close();
+
+        if(article == null){
+            messageModel.setMsg("查询失败，请重试");
+            messageModel.setCode(1);
+            return messageModel;
+        }
+
+        messageModel.setCode(0);
+        messageModel.setObject(article);
+
+        return messageModel;
+
+    }
 }

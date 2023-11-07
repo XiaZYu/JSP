@@ -20,26 +20,36 @@ public class ArticleServlet extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //设置编码格式
-        response.setContentType("text/html;charset=utf-8");
-        request.setCharacterEncoding("utf-8");
-        //获取请求参数
-        String event = request.getParameter("event");
+
     }
 
     private void findAll(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-
-        MessageModel messageModel = articleService.articleFindAll();
-
-        if(messageModel.getCode() == 0){
-            request.getSession().setAttribute("Article",messageModel.getObject());
-            System.out.println(messageModel.getObject());
-            response.sendRedirect("index.jsp");
+        MessageModel messageModel;
+        String id = request.getParameter("id");
+        if (id==null){
+            messageModel = articleService.articleFindAll();
+            if(messageModel.getCode() == 0){
+                request.getSession().setAttribute("Article",messageModel.getObject());
+                System.out.println(messageModel.getObject());
+                response.sendRedirect("index.jsp");
+            }else {
+                request.setAttribute("message",messageModel.getMsg());
+                request
+                        .getRequestDispatcher("error.jsp")
+                        .forward(request,response);
+            }
         }else {
-            request.setAttribute("message",messageModel.getMsg());
-            request
-                    .getRequestDispatcher("error.jsp")
-                    .forward(request,response);
+            messageModel = articleService.articleFindById(id);
+            if(messageModel.getCode() == 0){
+                request.getSession().setAttribute("ArticleById",messageModel.getObject());
+                System.out.println(messageModel.getObject());
+                response.sendRedirect("pdf-reader.jsp");
+            }else {
+                request.setAttribute("message",messageModel.getMsg());
+                request
+                        .getRequestDispatcher("error.jsp")
+                        .forward(request,response);
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ public class UserTest {
     @Test
     public void find(){
         ArticleService articleService = new ArticleService();
-        MessageModel messageModel = articleService.articleFindAll();
+        MessageModel messageModel = articleService.articleFindById("10001");
         System.out.println(messageModel.getObject());
 }
 }
