@@ -15,19 +15,6 @@
 </head>
 <body>
 <div>
-    <form action="Article" method="get" id="form">
-        <input type="hidden" id="event" name="id">
-    </form>
-    <script>
-        let id = <%=request.getParameter("id")%>;
-        if (id != null) {
-            window.onload = function () {
-                document.getElementById("event").value = <%=request.getParameter("id")%>
-                    document.getElementById("form").submit();
-            }
-        }
-    </script>
-
     <c:import url="header.jsp"></c:import>
     <main class="py-4">
         <div class="container mx-auto">
@@ -42,9 +29,7 @@
                             <span class="h-1/3 w-full block">${ArticleById[0].describe}</span>
                         </div>
                     </div>
-                    <div class="h-1/3 border-4 border-red-300">
-
-                    </div>
+                    <div class="h-1/3 text-4xl text-center" id="time"></div>
                 </div>
                 <div class="w-3/4 grid justify-items-center border-4 border-gray-800" id="pdf-container"></div>
             </div>
@@ -201,5 +186,45 @@
     const pdfReader = new PDFReader({
         container: 'pdf-container'
     });
+    let d = 0;
+    let m = 0;
+    let h = 0;
+    let b = 0;
+    const  time = document.getElementById("time");
+    (function count() {
+        const timer = setInterval(() => {
+            d++;
+            if (d === 60) {
+                d = 0;
+                m++;
+            }
+            if (m === 60) {
+                m = 0;
+                h++;
+            }
+            time.innerHTML = h + ':' + m + ':' + d +'<br>';
+        }, 1000);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                clearInterval(timer);
+                if (b===0){
+                    const timeBtn = document.createElement('button');
+                    timeBtn.innerText = '重新开始';
+                    timeBtn.classList.add('bg-blue-500', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
+                    timeBtn.addEventListener('click', () => {
+                        count();
+                        timeBtn.parentNode.removeChild(timeBtn);
+                        b=0;
+                    });
+                    b=1;
+                    time.appendChild(timeBtn);
+                }
+            }
+        })
+
+    })()
+
+
 </script>
 </html>

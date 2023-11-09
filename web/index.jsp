@@ -33,7 +33,7 @@
                             <div class="flex h-full">
                                 <img class="w-1/5 h-full" src="${a.photo}"/>
                                 <span class="flex flex-col flex-auto m-1.5 w-3/5">
-                                    <span class="m-1.5 h-1/3"  onclick="window.location='pdf-reader.jsp?id=${a.article_id}'">${a.title}</span>
+                                    <span class="m-1.5 h-1/3"  onclick="window.location='findbyid.jsp?id=${a.article_id}'">${a.title}</span>
                                     <span class="m-1.5 h-1/3">${a.author}/${a.publisher}</span>
                                     <span class="m-1.5 h-1/3 flex w-full divide-x">
                                         <div class="w-1/2 text-center">
